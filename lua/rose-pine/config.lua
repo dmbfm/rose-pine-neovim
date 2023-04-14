@@ -1,57 +1,41 @@
 local M = {}
 
----@class Groups
----@field background string
----@field panel string
----@field border string
----@field comment string
----@field link string
----@field punctuation string
----@field error string
----@field hint string
----@field info string
----@field warn string
----@field git_add string
----@field git_change string
----@field git_delete string
----@field git_dirty string
----@field git_ignore string
----@field git_merge string
----@field git_rename string
----@field git_stage string
----@field git_text string
----@field headings Headings|string
+---@class Highlight
+---@field fg string
+---@field bg string
+---@field sp string
+---@field bold boolean
+---@field italic boolean
+---@field undercurl boolean
+---@field underline boolean
+---@field underdouble boolean
+---@field underdotted boolean
+---@field underdashed boolean
+---@field strikethrough boolean
 
----@class Headings
----@field h1 string
----@field h2 string
----@field h3 string
----@field h4 string
----@field h5 string
----@field h6 string
+---@alias Variant 'main' | 'moon' | 'dawn'
 
 ---@class Config
----@field dark_variant 'main'|'moon'
----@field disable_background boolean
----@field disable_float_background boolean
----@field disable_italics boolean
----@field groups Groups
----@field highlight_groups table<string, any>
 local defaults = {
+	---@type 'auto' | Variant
+	variant = 'auto',
+
+	---@type Variant
 	dark_variant = 'main',
+
+	bold_vert_split = false,
+
+	dim_nc_background = false,
+
 	disable_background = false,
 	disable_float_background = false,
 	disable_italics = false,
-	highlight_groups = {},
-
-	---@deprecated Use `highlight_groups = { VertSplit = { fg = 'highlight_med', bg = 'highlight_med' } }` instead.
-	bold_vert_split = false,
-	---@deprecated Use `highlight_groups = { NormalNC = { fg = 'text', bg = 'surface' } }` instead.
-	dim_nc_background = false,
 
 	groups = {
 		background = 'base',
+		background_nc = 'nc',
 		panel = 'surface',
+		panel_nc = 'base',
 		border = 'highlight_med',
 		comment = 'muted',
 		link = 'iris',
@@ -78,6 +62,9 @@ local defaults = {
 			h6 = 'foam',
 		},
 	},
+
+	---@type table<string, Highlight>
+	highlight_groups = {},
 }
 
 ---@type Config
